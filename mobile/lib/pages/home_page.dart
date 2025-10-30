@@ -1,5 +1,7 @@
 import 'package:f_stop_timer/pages/print_page.dart';
+import 'package:f_stop_timer/pages/test_strip_page.dart';
 import 'package:flutter/cupertino.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -7,27 +9,33 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
     final pages = [
-      const PrintPage()
-      // const TimerConfigPage(),
-      // const TestStripPage(),
-      //   const BlePage(),
+      const PrintPage(),
+      const TestStripPage(),
     ];
-    final labels = ["Timer", "Test Strip", "BLE"];
+    final labels = ["Print", "Test Strip"];
+
+    // If there's only one tab, use a simple page scaffold to avoid CupertinoTabBar assertion.
+    if (labels.length < 2) {
+      return CupertinoPageScaffold(
+        navigationBar: const CupertinoNavigationBar(
+          middle: Text('Print'),
+        ),
+        child: const PrintPage(),
+      );
+    }
+
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         items: List.generate(labels.length, (index) {
           return BottomNavigationBarItem(
             icon: Icon(
               switch (index) {
-                0 => CupertinoIcons.timer,
-                1 => CupertinoIcons.square_lefthalf_fill,
-                2 => CupertinoIcons.bluetooth,
+                0 => CupertinoIcons.printer,
                 _ => CupertinoIcons.circle,
               },
             ),

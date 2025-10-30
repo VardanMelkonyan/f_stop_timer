@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../bluetooth/ble_scope.dart';
 
-class PrintPage extends StatelessWidget {
-  const PrintPage({super.key});
+class TestStripPage extends StatelessWidget {
+  const TestStripPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +38,13 @@ class PrintPage extends StatelessWidget {
               Text(ble.error!, style: const TextStyle(color: Colors.redAccent)),
             const SizedBox(height: 24),
             Text(
-              "Relay: ${ble.isOn ? "ON" : "OFF"}",
+              "Test Strip",
               style: const TextStyle(fontSize: 24, color: Colors.white),
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              "This is a placeholder page. Configure your test strip sequence here.",
+              style: TextStyle(color: Colors.white70),
             ),
             const SizedBox(height: 24),
             Row(
@@ -47,14 +52,14 @@ class PrintPage extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: (ble.connected && !ble.busy) ? () => ble.turnOn() : null,
-                    child: const Text("Turn ON"),
+                    child: const Text("Expose"),
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton(
                     onPressed: (ble.connected && !ble.busy) ? () => ble.turnOff() : null,
-                    child: const Text("Turn OFF"),
+                    child: const Text("Stop"),
                   ),
                 ),
               ],
